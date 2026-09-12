@@ -1,0 +1,15 @@
+[Unit]
+Description=Serveur webhook de paiements (donbot)
+After=network.target
+
+[Service]
+Type=simple
+User=%i
+WorkingDirectory=/home/%i/donbot
+EnvironmentFile=/home/%i/donbot/.env
+ExecStart=/home/%i/donbot/venv/bin/uvicorn webhook_server:app --host 127.0.0.1 --port 8000
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
